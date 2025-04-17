@@ -1,0 +1,83 @@
+{
+  "livro1": [
+    {
+      "nome": "Marco Antonio Belarmino",
+      "email": "marco.belarmino@claro.com.br",
+      "livro": "ambos"
+    },
+    {
+      "nome": "Norberto Tomiyoshi Imamura",
+      "email": "norberto.imamura@claro.com.br",
+      "livro": "ambos"
+    },
+    {
+      "nome": "Kenia Pena de Souza",
+      "email": "kenia.souza@claro.com.br",
+      "livro": "livro1"
+    },
+    {
+      "nome": "Sueli Teixeira da Silva",
+      "email": "sueli.teixeira@claro.com.br",
+      "livro": "ambos"
+    }
+  ],
+  "livro2": [
+    {
+      "nome": "Washington Almeida",
+      "email": "washington.almeida@claro.com.br",
+      "livro": "livro2"
+    },
+    {
+      "nome": "Cecilia Ramos",
+      "email": "cecilia.ramos@claro.com.br",
+      "livro": "livro2"
+    },
+    {
+      "nome": "Marco Antonio Belarmino",
+      "email": "marco.belarmino@claro.com.br",
+      "livro": "ambos"
+    },
+    {
+      "nome": "Norberto Tomiyoshi Imamura",
+      "email": "norberto.imamura@claro.com.br",
+      "livro": "ambos"
+    },
+    {
+      "nome": "Sueli Teixeira da Silva",
+      "email": "sueli.teixeira@claro.com.br",
+      "livro": "ambos"
+    }
+  ],
+  "todos": [
+    {
+      "nome": "Washington Almeida",
+      "email": "washington.almeida@claro.com.br",
+      "livro": "livro2"
+    },
+    {
+      "nome": "Cecilia Ramos",
+      "email": "cecilia.ramos@claro.com.br",
+      "livro": "livro2"
+    },
+    {
+      "nome": "Marco Antonio Belarmino",
+      "email": "marco.belarmino@claro.com.br",
+      "livro": "ambos"
+    },
+    {
+      "nome": "Norberto Tomiyoshi Imamura",
+      "email": "norberto.imamura@claro.com.br",
+      "livro": "ambos"
+    },
+    {
+      "nome": "Kenia Pena de Souza",
+      "email": "kenia.souza@claro.com.br",
+      "livro": "livro1"
+    },
+    {
+      "nome": "Sueli Teixeira da Silva",
+      "email": "sueli.teixeira@claro.com.br",
+      "livro": "ambos"
+    }
+  ]
+}
