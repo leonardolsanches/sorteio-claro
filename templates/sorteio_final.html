@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultado Final do Sorteio</title>
+  <style>
+    body {
+      background-color: #cc0000;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 85px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <img src="/static/logoclaro.png" alt="Logo Claro" class="logo">
+
+  <h1>Resultado Final do Sorteio</h1>
+
+  <h2>Livro 1 - O Poder da Atitude</h2>
+  {% if livro1 %}
+    <p><strong>{{ livro1.nome }}</strong> ({{ livro1.email }})</p>
+  {% else %}
+    <p>Nenhum participante para este livro.</p>
+  {% endif %}
+
+  <h2>Livro 2 - Great Leader to Work</h2>
+  {% if livro2 %}
+    <p><strong>{{ livro2.nome }}</strong> ({{ livro2.email }})</p>
+  {% else %}
+    <p>Nenhum participante para este livro.</p>
+  {% endif %}
+</body>
+</html>
