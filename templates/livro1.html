@@ -2,39 +2,49 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Livro 1 - O Poder da Atitude</title>
+  <title>O Poder da Atitude</title>
   <style>
     body {
-      background-color: #cc0000;
+      background-color: #c3000d;
       color: white;
       font-family: Arial, sans-serif;
-      padding: 40px;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
     }
-    .logo {
+
+    .logo-claro {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 85px;
+      top: 15px;
+      right: 15px;
+      width: 170px;
       height: auto;
     }
-    .content {
-      max-width: 800px;
-      margin: auto;
+
+    img.livro {
+      height: 250px;
+      margin: 30px 0 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00000088;
+    }
+
+    a.voltar {
+      display: inline-block;
+      margin-top: 30px;
+      color: white;
+      text-decoration: underline;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <img src="/static/logoclaro.png" alt="Logo Claro" class="logo">
-  <div class="content">
-    <h1>Livro 1 - O Poder da Atitude</h1>
-    <p><strong>Autor:</strong> Alexandre Slivnik</p>
-    <p>
-      Este livro destaca a importância da atitude positiva nas organizações. 
-      Com exemplos práticos e baseados em empresas de alta performance, o autor mostra como pessoas com atitude conseguem transformar seus ambientes e inspirar mudanças.
-    </p>
-    <p>
-      Um conteúdo valioso para quem quer liderar com propósito, melhorar o clima organizacional e desenvolver um olhar mais inspirador diante dos desafios.
-    </p>
-  </div>
+  <img src="/static/logoclaro.png" class="logo-claro" alt="Logo Claro">
+
+  <h1>📘 O Poder da Atitude</h1>
+  <img src="/static/livro1.png" alt="Capa do Livro" class="livro">
+  <p><strong>Autor:</strong> Alexandre Slivnik</p>
+  <p>Este livro mostra como a atitude positiva transforma profissionais comuns em extraordinários. A obra explora experiências de empresas que transformam clientes em fãs e a importância de cultivar a excelência no dia a dia.</p>
+
+  <a href="/" class="voltar">⬅ Voltar para a página inicial</a>
 </body>
 </html>
