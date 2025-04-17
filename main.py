@@ -1,15 +1,39 @@
 from flask import Flask, render_template, request, redirect, url_for
 import random
+import json
+import os
 
 app = Flask(__name__)
 
+# Inicializar listas
 participantes_livro1 = []
 participantes_livro2 = []
 todos_participantes = []
 
+DADOS_PATH = "dados.json"
+
+# Carrega dados salvos (se existir)
+if os.path.exists(DADOS_PATH):
+    with open(DADOS_PATH, "r", encoding="utf-8") as f:
+        dados = json.load(f)
+        participantes_livro1 = dados.get("livro1", [])
+        participantes_livro2 = dados.get("livro2", [])
+        todos_participantes = dados.get("todos", [])
+
+def salvar_dados():
+    with open(DADOS_PATH, "w", encoding="utf-8") as f:
+        json.dump({
+            "livro1": participantes_livro1,
+            "livro2": participantes_livro2,
+            "todos": todos_participantes
+        }, f, indent=2, ensure_ascii=False)
+
 @app.route('/')
 def home():
-    return render_template('index.html', participantes=todos_participantes)
+    return render_template(
+        'index.html',
+        participantes=todos_participantes
+    )
 
 @app.route('/cadastrar', methods=['POST'])
 def cadastrar():
@@ -22,6 +46,7 @@ def cadastrar():
 
     entrada = {'nome': nome, 'email': email, 'livro': livro}
 
+    # Adiciona às listas específicas
     if livro == 'livro1' and email not in [p['email'] for p in participantes_livro1]:
         participantes_livro1.append(entrada)
     elif livro == 'livro2' and email not in [p['email'] for p in participantes_livro2]:
@@ -35,6 +60,7 @@ def cadastrar():
     if email not in [p['email'] for p in todos_participantes]:
         todos_participantes.append(entrada)
 
+    salvar_dados()
     return redirect(url_for('home'))
 
 @app.route('/livro1')
@@ -70,12 +96,18 @@ def sorteio_final():
     if participantes_livro1:
         ganhador1 = random.choice(participantes_livro1)
 
-    candidatos_livro2 = [p for p in participantes_livro2 if ganhador1 is None or p['email'] != ganhador1['email']]
+    candidatos_livro2 = [
+        p for p in participantes_livro2 if ganhador1 is None or p['email'] != ganhador1['email']
+    ]
 
     if candidatos_livro2:
         ganhador2 = random.choice(candidatos_livro2)
 
-    return render_template('sorteio_final.html', livro1=ganhador1, livro2=ganhador2)
+    return render_template(
+        'sorteio_final.html',
+        livro1=ganhador1,
+        livro2=ganhador2
+    )
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
