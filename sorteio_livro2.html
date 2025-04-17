@@ -1,1 +1,40 @@
-<!-- sorteio_livro2.html COM logo da Claro no topo em proporção correta -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultado - Livro 2</title>
+  <style>
+    body {
+      background-color: #cc0000;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      text-align: center;
+    }
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 85px;
+      height: auto;
+    }
+    .resultado {
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+  <img src="/static/logoclaro.png" alt="Logo Claro" class="logo">
+  <div class="resultado">
+    <h1>🎉 Sorteado - Livro 2</h1>
+    <h2>Great Leader to Work</h2>
+
+    {% if pessoa %}
+      <p><strong>{{ pessoa.nome }}</strong></p>
+      <p>{{ pessoa.email }}</p>
+    {% else %}
+      <p>Nenhum participante foi sorteado.</p>
+    {% endif %}
+  </div>
+</body>
+</html>
