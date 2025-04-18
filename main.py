@@ -1,75 +1,97 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect
 import json
 import os
-from datetime import datetime
 import random
+from datetime import datetime
 
 app = Flask(__name__)
-DADOS_JSON = "dados.json"
+
+DADOS_PATH = "dados.json"
+
+# Lista inicial para fallback se o JSON não existir ainda
+dados_iniciais = [
+    {"nome": "Washington Almeida", "email": "washington.almeida@claro.com.br", "livros": ["livro2"]},
+    {"nome": "Cecilia Ramos", "email": "cecilia.ramos@claro.com.br", "livros": ["livro2"]},
+    {"nome": "Marco Antonio Belarmino", "email": "marco.belarmino@claro.com.br", "livros": ["livro1", "livro2"]},
+    {"nome": "Norberto Tomiyoshi Imamura", "email": "norberto.imamura@claro.com.br", "livros": ["livro1", "livro2"]},
+    {"nome": "Kenia Pena de Souza", "email": "kenia.souza@claro.com.br", "livros": ["livro1"]},
+    {"nome": "Sueli Teixeira da Silva", "email": "sueli.teixeira@claro.com.br", "livros": ["livro1", "livro2"]},
+    {"nome": "Barbara Pizane", "email": "barbara.azevedodepaula@claro.com.br", "livros": ["livro1", "livro2"]},
+    {"nome": "Maria Lucia Taborda Masiero", "email": "maria.masiero@claro.com.br", "livros": ["livro1", "livro2"]},
+    {"nome": "Elisangela Iel", "email": "elisangela.iel@claro.com.br", "livros": ["livro1", "livro2"]}
+]
 
 def carregar_dados():
-    if os.path.exists(DADOS_JSON):
-        with open(DADOS_JSON, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {
-        "livro1": [],
-        "livro2": []
-    }
+    if not os.path.exists(DADOS_PATH):
+        with open(DADOS_PATH, "w") as f:
+            json.dump(dados_iniciais, f, indent=4)
+    with open(DADOS_PATH, "r") as f:
+        return json.load(f)
 
-def salvar_dados(dados):
-    with open(DADOS_JSON, "w", encoding="utf-8") as f:
-        json.dump(dados, f, ensure_ascii=False, indent=4)
+def salvar_dados(lista):
+    with open(DADOS_PATH, "w") as f:
+        json.dump(lista, f, indent=4)
 
 @app.route("/")
 def index():
-    agora = datetime.now()
-    sorteio_data = datetime(2025, 4, 18, 18, 0, 0)
-    restante = (sorteio_data - agora).total_seconds()
-    return render_template("index.html", tempo_restante=restante)
-
-@app.route("/resumo/<livro>")
-def resumo(livro):
     dados = carregar_dados()
-    participantes = dados.get(livro, [])
-    return render_template("resumo.html", participantes=participantes, livro=livro)
+    return render_template("index.html", participantes=dados)
+
+@app.route("/resumo_livro1")
+def resumo_livro1():
+    dados = carregar_dados()
+    inscritos = [p for p in dados if "livro1" in p["livros"]]
+    return render_template("resumo_livro1.html", participantes=inscritos)
+
+@app.route("/resumo_livro2")
+def resumo_livro2():
+    dados = carregar_dados()
+    inscritos = [p for p in dados if "livro2" in p["livros"]]
+    return render_template("resumo_livro2.html", participantes=inscritos)
 
 @app.route("/cadastro", methods=["POST"])
 def cadastro():
-    nome = request.form["nome"]
-    email = request.form["email"].lower()
+    nome = request.form.get("nome")
+    email = request.form.get("email")
     livros = request.form.getlist("livros")
 
     if not email.endswith("@claro.com.br"):
-        return "Apenas e-mails @claro.com.br podem se inscrever no sorteio."
+        return "Sorteio restrito aos e-mails @claro.com.br"
 
     dados = carregar_dados()
 
-    # Remove o usuário se já estiver cadastrado
-    for lista in ["livro1", "livro2"]:
-        dados[lista] = [p for p in dados[lista] if p["email"] != email]
+    # Evita duplicidade
+    for p in dados:
+        if p["email"] == email:
+            return "Você já está inscrito."
 
-    novo = {"nome": nome, "email": email}
-
-    if "livro1" in livros:
-        dados["livro1"].append(novo)
-    if "livro2" in livros:
-        dados["livro2"].append(novo)
-
+    novo = {"nome": nome, "email": email, "livros": livros}
+    dados.append(novo)
     salvar_dados(dados)
-    return redirect(url_for("index"))
+
+    return redirect("/")
 
 @app.route("/sorteio_final")
 def sorteio_final():
     dados = carregar_dados()
-
-    participantes_livro1 = dados.get("livro1", [])
-    participantes_livro2 = dados.get("livro2", [])
+    participantes_livro1 = [p for p in dados if "livro1" in p["livros"]]
+    participantes_livro2 = [p for p in dados if "livro2" in p["livros"]]
 
     ganhador1 = random.choice(participantes_livro1) if participantes_livro1 else None
-    candidatos_livro2 = [p for p in participantes_livro2 if ganhador1 is None or p['email'] != ganhador1['email']]
+
+    # Remove ganhador1 da lista do livro2 (pelo e-mail)
+    candidatos_livro2 = [p for p in participantes_livro2 if ganhador1 is None or p["email"] != ganhador1["email"]]
     ganhador2 = random.choice(candidatos_livro2) if candidatos_livro2 else None
 
     return render_template("sorteio_final.html", livro1=ganhador1, livro2=ganhador2)
+
+@app.route("/contador")
+def contador():
+    sorteio_datetime = datetime(2025, 4, 18, 18, 0, 0)
+    agora = datetime.now()
+    restante = sorteio_datetime - agora
+    segundos_restantes = max(int(restante.total_seconds()), 0)
+    return {"segundos": segundos_restantes}
 
 if __name__ == "__main__":
     app.run(debug=True)
