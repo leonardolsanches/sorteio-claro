@@ -2,82 +2,65 @@
   "livro1": [
     {
       "nome": "Marco Antonio Belarmino",
-      "email": "marco.belarmino@claro.com.br",
-      "livro": "ambos"
+      "email": "marco.belarmino@claro.com.br"
     },
     {
       "nome": "Norberto Tomiyoshi Imamura",
-      "email": "norberto.imamura@claro.com.br",
-      "livro": "ambos"
+      "email": "norberto.imamura@claro.com.br"
     },
     {
       "nome": "Kenia Pena de Souza",
-      "email": "kenia.souza@claro.com.br",
-      "livro": "livro1"
+      "email": "kenia.souza@claro.com.br"
     },
     {
       "nome": "Sueli Teixeira da Silva",
-      "email": "sueli.teixeira@claro.com.br",
-      "livro": "ambos"
+      "email": "sueli.teixeira@claro.com.br"
+    },
+    {
+      "nome": "Barbara Pizane",
+      "email": "barbara.azevedodepaula@claro.com.br"
+    },
+    {
+      "nome": "Maria Lucia Taborda Masiero",
+      "email": "maria.masiero@claro.com.br"
+    },
+    {
+      "nome": "Elisangela Iel",
+      "email": "elisangela.iel@claro.com.br"
     }
   ],
   "livro2": [
     {
       "nome": "Washington Almeida",
-      "email": "washington.almeida@claro.com.br",
-      "livro": "livro2"
+      "email": "washington.almeida@claro.com.br"
     },
     {
       "nome": "Cecilia Ramos",
-      "email": "cecilia.ramos@claro.com.br",
-      "livro": "livro2"
+      "email": "cecilia.ramos@claro.com.br"
     },
     {
       "nome": "Marco Antonio Belarmino",
-      "email": "marco.belarmino@claro.com.br",
-      "livro": "ambos"
+      "email": "marco.belarmino@claro.com.br"
     },
     {
       "nome": "Norberto Tomiyoshi Imamura",
-      "email": "norberto.imamura@claro.com.br",
-      "livro": "ambos"
+      "email": "norberto.imamura@claro.com.br"
     },
     {
       "nome": "Sueli Teixeira da Silva",
-      "email": "sueli.teixeira@claro.com.br",
-      "livro": "ambos"
-    }
-  ],
-  "todos": [
-    {
-      "nome": "Washington Almeida",
-      "email": "washington.almeida@claro.com.br",
-      "livro": "livro2"
+      "email": "sueli.teixeira@claro.com.br"
     },
     {
-      "nome": "Cecilia Ramos",
-      "email": "cecilia.ramos@claro.com.br",
-      "livro": "livro2"
+      "nome": "Barbara Pizane",
+      "email": "barbara.azevedodepaula@claro.com.br"
     },
     {
-      "nome": "Marco Antonio Belarmino",
-      "email": "marco.belarmino@claro.com.br",
-      "livro": "ambos"
+      "nome": "Maria Lucia Taborda Masiero",
+      "email": "maria.masiero@claro.com.br"
     },
     {
-      "nome": "Norberto Tomiyoshi Imamura",
-      "email": "norberto.imamura@claro.com.br",
-      "livro": "ambos"
-    },
-    {
-      "nome": "Kenia Pena de Souza",
-      "email": "kenia.souza@claro.com.br",
-      "livro": "livro1"
-    },
-    {
-      "nome": "Sueli Teixeira da Silva",
-      "email": "sueli.teixeira@claro.com.br",
-      "livro": "ambos"
+      "nome": "Elisangela Iel",
+      "email": "elisangela.iel@claro.com.br"
     }
   ]
 }
