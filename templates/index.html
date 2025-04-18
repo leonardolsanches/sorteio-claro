@@ -71,19 +71,16 @@
       margin-top: 5px;
       text-decoration: underline;
     }
-
   </style>
 </head>
 <body>
 
-  <!-- Banner no topo -->
   <img src="/static/banner.png" alt="Banner Claro ORYS" class="banner">
 
-  <p>O sorteio será realizado automaticamente às <strong>18h de amanhã</strong>.</p>
+  <p>O sorteio será realizado automaticamente às <strong>18h do dia 18/04/2025</strong>.</p>
   <h3>⏳ Tempo restante:</h3>
   <div class="countdown" id="countdown">Carregando...</div>
 
-  <!-- Capas dos livros -->
   <div class="livros">
     <div>
       <a href="/livro1">
@@ -101,7 +98,6 @@
     </div>
   </div>
 
-  <!-- Formulário de cadastro -->
   <form id="cadastroForm" action="/cadastrar" method="POST" onsubmit="return validarEmail();">
     <input type="text" name="nome" placeholder="Seu nome" required>
     <input type="email" name="email" id="email" placeholder="Seu e-mail @claro.com.br" required>
@@ -115,7 +111,6 @@
     <div class="error" id="erroEmail"></div>
   </form>
 
-  <!-- Lista de participantes -->
   <h2>Participantes cadastrados:</h2>
   <ul>
     {% for pessoa in participantes %}
@@ -123,7 +118,6 @@
     {% endfor %}
   </ul>
 
-  <!-- Script do contador -->
   <script>
     function validarEmail() {
       const email = document.getElementById("email").value;
@@ -138,11 +132,12 @@
 
     window.addEventListener("DOMContentLoaded", () => {
       const countdown = document.getElementById("countdown");
+
+      // Definir data e hora fixa do sorteio: 18/04/2025 às 18h (UTC-3)
+      const fim = new Date("2025-04-18T18:00:00-03:00");
+
       function atualizaContagem() {
         const agora = new Date();
-        const fim = new Date();
-        fim.setDate(fim.getDate() + 1);
-        fim.setHours(18, 0, 0, 0);
         const diff = fim - agora;
 
         if (diff <= 0) {
@@ -155,6 +150,7 @@
           countdown.innerHTML = `${h}:${m}:${s}`;
         }
       }
+
       setInterval(atualizaContagem, 1000);
       atualizaContagem();
     });
