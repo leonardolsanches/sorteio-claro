@@ -1,66 +1,11 @@
-{
-  "livro1": [
-    {
-      "nome": "Marco Antonio Belarmino",
-      "email": "marco.belarmino@claro.com.br"
-    },
-    {
-      "nome": "Norberto Tomiyoshi Imamura",
-      "email": "norberto.imamura@claro.com.br"
-    },
-    {
-      "nome": "Kenia Pena de Souza",
-      "email": "kenia.souza@claro.com.br"
-    },
-    {
-      "nome": "Sueli Teixeira da Silva",
-      "email": "sueli.teixeira@claro.com.br"
-    },
-    {
-      "nome": "Barbara Pizane",
-      "email": "barbara.azevedodepaula@claro.com.br"
-    },
-    {
-      "nome": "Maria Lucia Taborda Masiero",
-      "email": "maria.masiero@claro.com.br"
-    },
-    {
-      "nome": "Elisangela Iel",
-      "email": "elisangela.iel@claro.com.br"
-    }
-  ],
-  "livro2": [
-    {
-      "nome": "Washington Almeida",
-      "email": "washington.almeida@claro.com.br"
-    },
-    {
-      "nome": "Cecilia Ramos",
-      "email": "cecilia.ramos@claro.com.br"
-    },
-    {
-      "nome": "Marco Antonio Belarmino",
-      "email": "marco.belarmino@claro.com.br"
-    },
-    {
-      "nome": "Norberto Tomiyoshi Imamura",
-      "email": "norberto.imamura@claro.com.br"
-    },
-    {
-      "nome": "Sueli Teixeira da Silva",
-      "email": "sueli.teixeira@claro.com.br"
-    },
-    {
-      "nome": "Barbara Pizane",
-      "email": "barbara.azevedodepaula@claro.com.br"
-    },
-    {
-      "nome": "Maria Lucia Taborda Masiero",
-      "email": "maria.masiero@claro.com.br"
-    },
-    {
-      "nome": "Elisangela Iel",
-      "email": "elisangela.iel@claro.com.br"
-    }
-  ]
-}
+[
+    {"nome": "Washington Almeida", "email": "washington.almeida@claro.com.br", "livros": ["livro2"]},
+    {"nome": "Cecilia Ramos", "email": "cecilia.ramos@claro.com.br", "livros": ["livro2"]},
+    {"nome": "Marco Antonio Belarmino", "email": "marco.belarmino@claro.com.br", "livros": ["livro1", "livro2"]},
+    {"nome": "Norberto Tomiyoshi Imamura", "email": "norberto.imamura@claro.com.br", "livros": ["livro1", "livro2"]},
+    {"nome": "Kenia Pena de Souza", "email": "kenia.souza@claro.com.br", "livros": ["livro1"]},
+    {"nome": "Sueli Teixeira da Silva", "email": "sueli.teixeira@claro.com.br", "livros": ["livro1", "livro2"]},
+    {"nome": "Barbara Pizane", "email": "barbara.azevedodepaula@claro.com.br", "livros": ["livro1", "livro2"]},
+    {"nome": "Maria Lucia Taborda Masiero", "email": "maria.masiero@claro.com.br", "livros": ["livro1", "livro2"]},
+    {"nome": "Elisangela Iel", "email": "elisangela.iel@claro.com.br", "livros": ["livro1", "livro2"]}
+]
