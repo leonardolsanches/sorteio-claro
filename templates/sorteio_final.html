@@ -1,11 +1,11 @@
 
 <!DOCTYPE html>
-<html lang="pt-br">
-<head><meta charset="UTF-8"><title>Resultado do Sorteio</title></head>
+<html>
+<head><title>Resultado Final</title></head>
 <body>
-<h1>🏆 Resultado Final do Sorteio</h1>
-<p><strong>Livro 1:</strong> {{ livro1.nome if livro1 else "Nenhum participante" }} ({{ livro1.email if livro1 else "" }})</p>
-<p><strong>Livro 2:</strong> {{ livro2.nome if livro2 else "Nenhum participante" }} ({{ livro2.email if livro2 else "" }})</p>
-<a href="/">Voltar</a>
+  <h1>🎉 Resultado Final do Sorteio</h1>
+  <p><strong>Livro 1:</strong> {{ livro1.nome if livro1 else 'Sem vencedor' }}</p>
+  <p><strong>Livro 2:</strong> {{ livro2.nome if livro2 else 'Sem vencedor' }}</p>
+  <a href="/">Voltar</a>
 </body>
 </html>
