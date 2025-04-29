@@ -1,159 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Sorteio de Livros | Claro + ORYS</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #c3000d;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    .banner {
-      width: 100%;
-      display: block;
-    }
-
-    .livros {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 40px;
-      margin: 20px auto;
-    }
-
-    .livros img {
-      height: 200px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00000066;
-      cursor: pointer;
-    }
-
-    input, select, button {
-      padding: 10px;
-      margin: 8px;
-      border-radius: 5px;
-      border: none;
-      font-size: 16px;
-    }
-
-    button {
-      background-color: white;
-      color: #c3000d;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .countdown {
-      font-size: 24px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .error {
-      color: yellow;
-      font-weight: bold;
-    }
-
-    a.livro-link {
-      color: white;
-      font-weight: bold;
-      display: inline-block;
-      margin-top: 5px;
-      text-decoration: underline;
-    }
-  </style>
-</head>
+<head><meta charset="UTF-8"><title>Sorteio</title></head>
 <body>
-
-  <img src="/static/banner.png" alt="Banner Claro ORYS" class="banner">
-
-  <p>O sorteio será realizado automaticamente às <strong>18h do dia 18/04/2025</strong>.</p>
-  <h3>⏳ Tempo restante:</h3>
-  <div class="countdown" id="countdown">Carregando...</div>
-
-  <div class="livros">
-    <div>
-      <a href="/livro1">
-        <img src="/static/livro1.png" alt="O Poder da Atitude">
-      </a>
-      <br>
-      <a class="livro-link" href="/livro1">Ver resumo do Livro 1</a>
-    </div>
-    <div>
-      <a href="/livro2">
-        <img src="/static/livro2.png" alt="Great Leader to Work">
-      </a>
-      <br>
-      <a class="livro-link" href="/livro2">Ver resumo do Livro 2</a>
-    </div>
-  </div>
-
-  <form id="cadastroForm" action="/cadastrar" method="POST" onsubmit="return validarEmail();">
-    <input type="text" name="nome" placeholder="Seu nome" required>
-    <input type="email" name="email" id="email" placeholder="Seu e-mail @claro.com.br" required>
-    <select name="livro" required>
-      <option value="">Selecione o livro</option>
-      <option value="livro1">O Poder da Atitude</option>
-      <option value="livro2">Great Leader to Work</option>
-      <option value="ambos">Ambos os livros</option>
-    </select>
-    <button type="submit">Cadastrar</button>
-    <div class="error" id="erroEmail"></div>
-  </form>
-
-  <h2>Participantes cadastrados:</h2>
-  <ul>
-    {% for pessoa in participantes %}
-      <li>{{ pessoa.nome }} ({{ pessoa.email }}) - {{ pessoa.livro }}</li>
-    {% endfor %}
-  </ul>
-
-  <script>
-    function validarEmail() {
-      const email = document.getElementById("email").value;
-      const erro = document.getElementById("erroEmail");
-      if (!email.endsWith("@claro.com.br")) {
-        erro.textContent = "Atenção: o sorteio é exclusivo para colaboradores da Claro.";
-        return false;
-      }
-      erro.textContent = "";
-      return true;
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      const countdown = document.getElementById("countdown");
-
-      // Definir data e hora fixa do sorteio: 18/04/2025 às 18h (UTC-3)
-      const fim = new Date("2025-04-18T18:00:00-03:00");
-
-      function atualizaContagem() {
-        const agora = new Date();
-        const diff = fim - agora;
-
-        if (diff <= 0) {
-          countdown.innerHTML = "⏰ Sorteio em andamento!";
-          window.location.href = "/sorteio_final";
-        } else {
-          const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
-          const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-          const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-          countdown.innerHTML = `${h}:${m}:${s}`;
-        }
-      }
-
-      setInterval(atualizaContagem, 1000);
-      atualizaContagem();
-    });
-  </script>
+<h1>Inscrição para Sorteio</h1>
+<form method="POST" action="/cadastro">
+  Nome: <input type="text" name="nome"><br>
+  Email: <input type="email" name="email"><br>
+  <label><input type="checkbox" name="livros" value="livro1"> Livro 1</label><br>
+  <label><input type="checkbox" name="livros" value="livro2"> Livro 2</label><br>
+  <button type="submit">Participar</button>
+</form>
+<hr>
+<h2>Participantes já inscritos:</h2>
+<ul>
+{% for p in participantes %}
+  <li>{{ p.nome }} ({{ p.email }}) - {{ ", ".join(p.livros) }}</li>
+{% endfor %}
+</ul>
 </body>
 </html>
