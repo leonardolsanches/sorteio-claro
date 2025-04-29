@@ -1,61 +1,22 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Sorteio de Livros</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #c3000d;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    .countdown {
-      font-size: 24px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-  </style>
-</head>
+<head><meta charset="UTF-8"><title>Sorteio</title></head>
 <body>
-  <img src="/static/banner.png" alt="Banner Claro ORYS" style="width: 100%;">
-  <h1>Sorteio de Livros</h1>
-  <p>Doados pela ORYS no evento de 06/02/25</p>
-  <p>O sorteio ocorrerá automaticamente em:</p>
-  <div class="countdown" id="countdown">Carregando...</div>
-  <form method="POST" action="/cadastro">
-    <input type="text" name="nome" placeholder="Seu nome" required><br>
-    <input type="email" name="email" placeholder="Seu e-mail @claro.com.br" required><br>
-    <label><input type="checkbox" name="livros" value="livro1"> Livro 1</label><br>
-    <label><input type="checkbox" name="livros" value="livro2"> Livro 2</label><br>
-    <button type="submit">Participar</button>
-  </form>
-  <ul>
-    {% for p in participantes %}
-      <li>{{ p.nome }} - {{ p.email }} - {{ ', '.join(p.livros) }}</li>
-    {% endfor %}
-  </ul>
-  <script>
-    const fim = new Date("2025-07-31T18:00:00-03:00");
-    const countdown = document.getElementById("countdown");
-
-    function atualizar() {
-      const agora = new Date();
-      const diff = fim - agora;
-      if (diff <= 0) {
-        window.location.href = "/sorteio_final";
-      } else {
-        const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
-        const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-        const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-        countdown.innerHTML = `${h}:${m}:${s}`;
-      }
-    }
-    setInterval(atualizar, 1000);
-    atualizar();
-  </script>
+<h1>Inscrição para Sorteio</h1>
+<form method="POST" action="/cadastro">
+  Nome: <input type="text" name="nome"><br>
+  Email: <input type="email" name="email"><br>
+  <label><input type="checkbox" name="livros" value="livro1"> Livro 1</label><br>
+  <label><input type="checkbox" name="livros" value="livro2"> Livro 2</label><br>
+  <button type="submit">Participar</button>
+</form>
+<hr>
+<h2>Participantes já inscritos:</h2>
+<ul>
+{% for p in participantes %}
+  <li>{{ p.nome }} ({{ p.email }}) - {{ ", ".join(p.livros) }}</li>
+{% endfor %}
+</ul>
 </body>
 </html>
