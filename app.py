@@ -1,11 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
-import json
-import os
-import random
+import json, os, random
 from datetime import datetime
 
 app = Flask(__name__)
-
 DADOS_PATH = "dados.json"
 GANHADORES_PATH = "ganhadores.json"
 SORTEIO_DATA_HORA = datetime(2025, 7, 31, 18, 0, 0)
