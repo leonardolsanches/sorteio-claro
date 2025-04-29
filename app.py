@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, url_for
 import json
 import os
@@ -43,15 +42,23 @@ def cadastro():
 
     nome = request.form.get("nome")
     email = request.form.get("email").lower()
-    livros = request.form.getlist("livros")
+    livro = request.form.get("livros")
 
     if not email.endswith("@claro.com.br"):
-        return "Sorteio restrito a colaboradores da Claro."
+        return "Cadastro não autorizado. Domínio do e-mail inválido."
 
     dados = carregar_dados()
     for p in dados:
         if p["email"] == email:
             return "Este e-mail já está inscrito."
+
+    livros = []
+    if livro == "livro1":
+        livros = ["livro1"]
+    elif livro == "livro2":
+        livros = ["livro2"]
+    elif livro == "ambos":
+        livros = ["livro1", "livro2"]
 
     novo = { "nome": nome, "email": email, "livros": livros }
     dados.append(novo)
@@ -78,6 +85,14 @@ def sorteio_final():
 
     salvar_ganhadores(ganhador1, ganhador2)
     return render_template("sorteio_final.html", livro1=ganhador1, livro2=ganhador2)
+
+@app.route("/livro1")
+def livro1():
+    return render_template("livro1.html")
+
+@app.route("/livro2")
+def livro2():
+    return render_template("livro2.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
