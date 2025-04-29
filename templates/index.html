@@ -1,22 +1,119 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head><meta charset="UTF-8"><title>Sorteio</title></head>
+<head>
+  <meta charset="UTF-8">
+  <title>Sorteio de Livros | Claro + ORYS</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #c3000d;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    img.banner {
+      width: 100%;
+      display: block;
+    }
+    .countdown {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 8px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background-color: white;
+      color: #c3000d;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .livros {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin: 20px auto;
+    }
+    .livros img {
+      height: 200px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00000066;
+      cursor: pointer;
+    }
+    a.livro-link {
+      color: white;
+      font-weight: bold;
+      text-decoration: underline;
+      display: inline-block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
 <body>
-<h1>Inscrição para Sorteio</h1>
-<form method="POST" action="/cadastro">
-  Nome: <input type="text" name="nome"><br>
-  Email: <input type="email" name="email"><br>
-  <label><input type="checkbox" name="livros" value="livro1"> Livro 1</label><br>
-  <label><input type="checkbox" name="livros" value="livro2"> Livro 2</label><br>
-  <button type="submit">Participar</button>
-</form>
-<hr>
-<h2>Participantes já inscritos:</h2>
-<ul>
-{% for p in participantes %}
-  <li>{{ p.nome }} ({{ p.email }}) - {{ ", ".join(p.livros) }}</li>
-{% endfor %}
-</ul>
+
+  <img src="/static/banner.png" alt="Banner Claro ORYS" class="banner">
+
+  <p>Doados pela ORYS no evento de 06/02/25</p>
+  <h3>⏳ Tempo restante até o sorteio:</h3>
+  <div class="countdown" id="countdown">Carregando...</div>
+
+  <div class="livros">
+    <div>
+      <a href="/livro1">
+        <img src="/static/livro1.png" alt="Livro 1">
+      </a>
+      <br>
+      <a class="livro-link" href="/livro1">Ver resumo do Livro 1</a>
+    </div>
+    <div>
+      <a href="/livro2">
+        <img src="/static/livro2.png" alt="Livro 2">
+      </a>
+      <br>
+      <a class="livro-link" href="/livro2">Ver resumo do Livro 2</a>
+    </div>
+  </div>
+
+  <form id="cadastroForm" action="/cadastro" method="POST">
+    <input type="text" name="nome" placeholder="Seu nome" required><br>
+    <input type="email" name="email" id="email" placeholder="Seu e-mail @claro.com.br" required><br>
+    <select name="livros" required>
+      <option value="">Selecione o livro</option>
+      <option value="livro1">Livro 1 - O Poder da Atitude</option>
+      <option value="livro2">Livro 2 - Great Leader to Work</option>
+      <option value="ambos">Ambos</option>
+    </select><br>
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <script>
+    const fim = new Date("2025-07-31T18:00:00-03:00");
+    const countdown = document.getElementById("countdown");
+
+    function atualizarContador() {
+      const agora = new Date();
+      const diff = fim - agora;
+      if (diff <= 0) {
+        window.location.href = "/sorteio_final";
+      } else {
+        const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+        countdown.innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+      }
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+  </script>
 </body>
 </html>
